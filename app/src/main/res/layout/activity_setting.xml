@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#dddddd">
+
+    <View
+        android:id="@+id/view_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_grid_height"
+        android:paddingStart="@dimen/setting_grid_padding"
+        android:paddingEnd="@dimen/setting_grid_padding"
+        android:orientation="horizontal"
+        android:background="@color/setting_grid_backgroud"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/setting_text_size"
+            android:textColor="@color/setting_text"
+            android:text="@string/setting_key_grid_num"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_grid_num_sub"
+            android:layout_width="@dimen/setting_grid_height"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/btn_bg"
+            android:textSize="@dimen/setting_text_size"
+            android:textColor="@color/setting_text"
+            android:text="-"/>
+
+        <TextView
+            android:id="@+id/tv_grid_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/setting_text_size"
+            android:textColor="@color/setting_text"/>
+
+        <TextView
+            android:id="@+id/tv_grid_num_add"
+            android:layout_width="@dimen/setting_grid_height"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/btn_bg"
+            android:textSize="@dimen/setting_text_size"
+            android:textColor="@color/setting_text"
+            android:text="+"/>
+    </LinearLayout>
 
 </LinearLayout>

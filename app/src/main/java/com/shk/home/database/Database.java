@@ -7,14 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public abstract class Database extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "home.db";
 
-    protected final SQLiteDatabase mWriter;
-    protected final SQLiteDatabase mReader;
-
     public Database(Context context) {
         super(context, DATABASE_NAME, null, 1);
-
-        mWriter = getWritableDatabase();
-        mReader = getReadableDatabase();
     }
 
     @Override

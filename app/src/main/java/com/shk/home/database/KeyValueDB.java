@@ -1,18 +1,19 @@
 package com.shk.home.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.shk.home.util.AppLog;
 
-public class KeyValueDatabase extends Database {
+public class KeyValueDB extends Database {
     protected static final String COL_KEY = "key_";
     protected static final String COL_VALUE = "value_";
 
     protected final String mTableName;
 
-    public KeyValueDatabase(Context context, String tableName) {
+    public KeyValueDB(Context context, String tableName) {
         super(context);
 
         mTableName = tableName;
@@ -26,8 +27,8 @@ public class KeyValueDatabase extends Database {
     }
 
     public boolean has(String key) {
-        Cursor cursor = mReader.query(mTableName, new String[] {COL_VALUE},
-                COL_KEY  + " = ?", new String[] {key},
+        Cursor cursor = getReadableDatabase().query(mTableName, new String[]{COL_VALUE},
+                COL_KEY + " = ?", new String[]{key},
                 null, null, null);
 
         boolean result = cursor.getCount() > 0;
@@ -40,15 +41,22 @@ public class KeyValueDatabase extends Database {
     public void set(String key, Object value) {
         String string = String.valueOf(value);
 
-        String sql = String.format("insert into %s(%s, %s) values('%s', '%s') on duplicate key update %s='%s'",
-                mTableName, COL_KEY, COL_VALUE, key, string, COL_VALUE, string);
+        ContentValues cv = new ContentValues();
+        cv.put(COL_VALUE, string);
 
-        mWriter.execSQL(sql);
+        int count = getWritableDatabase().update(mTableName, cv,
+                COL_KEY +  " = ?", new String[] {key});
+
+        if (count == 0) {
+            cv.put(COL_KEY, key);
+
+            getWritableDatabase().insert(mTableName, null, cv);
+        }
     }
 
     public String getString(String key, String def) {
-        Cursor cursor = mReader.query(mTableName, new String[] {COL_VALUE},
-                COL_KEY  + " = ?", new String[] {key},
+        Cursor cursor = getReadableDatabase().query(mTableName, new String[]{COL_VALUE},
+                COL_KEY + " = ?", new String[]{key},
                 null, null, null);
 
         String value = def;

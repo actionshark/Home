@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <color name="btn_pressed">#eeeeee</color>
+    <color name="btn_normal">#ffffff</color>
+
+    <color name="setting_grid_backgroud">#ffffff</color>
+    <color name="setting_text">#666666</color>
+</resources>

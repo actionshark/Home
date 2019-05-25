@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="setting_grid_height">52dp</dimen>
+    <dimen name="setting_grid_margin">2dp</dimen>
+    <dimen name="setting_grid_padding">10dp</dimen>
+    <dimen name="setting_group_margin">10dp</dimen>
+    <dimen name="setting_text_size">16sp</dimen>
+</resources>
