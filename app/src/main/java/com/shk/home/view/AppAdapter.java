@@ -1,4 +1,4 @@
-package com.shk.home.data;
+package com.shk.home.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shk.home.R;
+import com.shk.home.data.AppInfo;
+import com.shk.home.database.SettingDB;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppGridAdapter extends BaseAdapter {
+public class AppAdapter extends BaseAdapter {
     private class Holder {
         ImageView icon;
         TextView label;
@@ -22,13 +24,15 @@ public class AppGridAdapter extends BaseAdapter {
     private Context mContext;
     private List<AppInfo> mDataList;
 
-    public AppGridAdapter(Context context) {
+    private SettingDB mSettingDB;
+
+    public AppAdapter(Context context, SettingDB settingDB) {
         mContext = context;
+        mSettingDB = settingDB;
     }
 
     public void setDataList(List<AppInfo> dataList) {
         mDataList = new ArrayList<>(dataList);
-        notifyDataSetChanged();
     }
 
     public List<AppInfo> getDataList() {
@@ -62,10 +66,23 @@ public class AppGridAdapter extends BaseAdapter {
             holder.label = view.findViewById(R.id.tv_label);
         }
 
+        int height = mSettingDB.getInt(SettingDB.KEY_GRID_HEIGHT, 0);
+
+        ViewGroup.LayoutParams lp = view.getLayoutParams();
+        if (lp == null) {
+            lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+            view.setLayoutParams(lp);
+        } else {
+            lp.height = height;
+        }
+
         Holder holder = (Holder) view.getTag();
         AppInfo data = mDataList.get(position);
 
+        lp = holder.icon.getLayoutParams();
+        lp.width = lp.height = mSettingDB.getInt(SettingDB.KEY_ICON_SIZE, 0);
         holder.icon.setImageDrawable(data.icon);
+
         holder.label.setText(data.label);
 
         return view;

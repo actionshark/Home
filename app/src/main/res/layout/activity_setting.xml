@@ -2,62 +2,232 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#dddddd">
+    android:gravity="center"
+    android:background="#dddddd"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/view_status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/setting_grid_height"
-        android:paddingStart="@dimen/setting_grid_padding"
-        android:paddingEnd="@dimen/setting_grid_padding"
-        android:orientation="horizontal"
-        android:background="@color/setting_grid_backgroud"
-        android:gravity="center">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/setting_text_size"
-            android:textColor="@color/setting_text"
-            android:text="@string/setting_key_grid_num"/>
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_grid_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
 
-        <TextView
-            android:id="@+id/tv_grid_num_sub"
-            android:layout_width="@dimen/setting_grid_height"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:background="@drawable/btn_bg"
-            android:textSize="@dimen/setting_text_size"
-            android:textColor="@color/setting_text"
-            android:text="-"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_key_grid_num"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
 
-        <TextView
-            android:id="@+id/tv_grid_num"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="@dimen/setting_text_size"
-            android:textColor="@color/setting_text"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/tv_grid_num_add"
-            android:layout_width="@dimen/setting_grid_height"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:background="@drawable/btn_bg"
-            android:textSize="@dimen/setting_text_size"
-            android:textColor="@color/setting_text"
-            android:text="+"/>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_grid_num_sub"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/sub_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
 
+                <TextView
+                    android:id="@+id/tv_grid_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_grid_num_add"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/add_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_group_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_key_grid_height"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_grid_height_sub"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/sub_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_grid_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_grid_height_add"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/add_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_group_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_key_icon_size"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_icon_size_sub"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/sub_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_icon_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_icon_size_add"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/add_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_group_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_key_label_color"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_label_color_sub"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/sub_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_label_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_label_color_add"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/add_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/grid_sample"
+        layout="@layout/grid_app" />
 </LinearLayout>

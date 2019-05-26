@@ -3,4 +3,10 @@
 
     <string name="setting_key_grid_num">Grid Num</string>
     <string name="setting_key_grid_height">Grid Height</string>
+    <string name="setting_key_icon_size">Icon Size</string>
+    <string name="setting_key_label_size">Label Size</string>
+    <string name="setting_key_label_color">Label Color</string>
+    
+    <string name="add_char">+</string>
+    <string name="sub_char">-</string>
 </resources>
