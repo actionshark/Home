@@ -227,7 +227,14 @@
         </LinearLayout>
     </ScrollView>
 
-    <include
-        android:id="@+id/grid_sample"
-        layout="@layout/grid_app" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/setting_group_margin"
+        android:background="#ffffff">
+
+        <include
+            android:id="@+id/grid_sample"
+            layout="@layout/grid_app" />
+    </LinearLayout>
 </LinearLayout>
