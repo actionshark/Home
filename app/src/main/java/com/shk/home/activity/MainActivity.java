@@ -20,7 +20,7 @@ public class MainActivity extends BaseActivity {
     private SettingDB mSettingDB;
 
     private GridView mGvApp;
-    private AppAdapter mAdatperApp;
+    private AppAdapter mAdapterApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +37,13 @@ public class MainActivity extends BaseActivity {
         mGvApp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AppInfo ai = mAdatperApp.getDataList().get(position);
+                AppInfo ai = mAdapterApp.getDataList().get(position);
                 startActivity(ai.intent);
             }
         });
 
-        mAdatperApp = new AppAdapter(this, mSettingDB);
-        mGvApp.setAdapter(mAdatperApp);
+        mAdapterApp = new AppAdapter(this, mSettingDB);
+        mGvApp.setAdapter(mAdapterApp);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
         SettingDB.ICON_SIZE_MAX = dm.widthPixels / SettingDB.GRID_NUM_MIN  * 2 / 3;
 
         List<AppInfo> appInfos = Util.getAppInfos(this);
-        mAdatperApp.setDataList(appInfos);
-        mAdatperApp.notifyDataSetChanged();
+        mAdapterApp.setDataList(appInfos);
+        mAdapterApp.notifyDataSetChanged();
     }
 }

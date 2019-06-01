@@ -58,8 +58,11 @@ public class AppAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
             view = LayoutInflater.from(mContext).inflate(R.layout.grid_app, null);
+        }
 
-            Holder holder = new Holder();
+        Holder holder = (Holder) view.getTag();
+        if (holder == null) {
+            holder = new Holder();
             view.setTag(holder);
 
             holder.icon = view.findViewById(R.id.iv_icon);
@@ -76,7 +79,6 @@ public class AppAdapter extends BaseAdapter {
             lp.height = height;
         }
 
-        Holder holder = (Holder) view.getTag();
         AppInfo data = mDataList.get(position);
 
         lp = holder.icon.getLayoutParams();
@@ -84,6 +86,7 @@ public class AppAdapter extends BaseAdapter {
         holder.icon.setImageDrawable(data.icon);
 
         holder.label.setText(data.label);
+        holder.label.setTextColor(mSettingDB.getInt(SettingDB.KEY_LABEL_COLOR, SettingDB.LABEL_COLOR_DEF));
 
         return view;
     }

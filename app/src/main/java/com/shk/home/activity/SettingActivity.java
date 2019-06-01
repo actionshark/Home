@@ -3,13 +3,20 @@ package com.shk.home.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.shk.home.R;
+import com.shk.home.data.AppInfo;
 import com.shk.home.database.SettingDB;
+import com.shk.home.view.AppAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingActivity extends BaseActivity {
     private SettingDB mDatabase;
@@ -17,9 +24,10 @@ public class SettingActivity extends BaseActivity {
     private Handler mHandler;
     private long mRepeatDelay = 20;
 
+    private int mScreenWidth;
+
     private View mAppGrid;
-    private ImageView mIvIcon;
-    private TextView mTvLabel;
+    private AppAdapter mAppAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,48 +37,47 @@ public class SettingActivity extends BaseActivity {
 
         mHandler = new Handler(Looper.getMainLooper());
 
+        Window window = getWindow();
+        WindowManager wm = window.getWindowManager();
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        mScreenWidth = dm.widthPixels;
+
         setContentView(R.layout.activity_setting);
 
         View statusBar = findViewById(R.id.view_status_bar);
         statusBar.getLayoutParams().height = getStatusBarHeight();
 
-        mAppGrid = findViewById(R.id.grid_sample);
-        mIvIcon = findViewById(R.id.iv_icon);
-        mIvIcon.setImageResource(R.drawable.icon);
-        mTvLabel = findViewById(R.id.tv_label);
-        mTvLabel.setText(R.string.app_name);
+        AppInfo ai = new AppInfo();
+        ai.icon = getDrawable(R.drawable.icon);
+        ai.label = getString(R.string.app_name);
 
-        int gridNum = mDatabase.getInt(SettingDB.KEY_GRID_NUM, SettingDB.GRID_NUM_DEF);
-        final TextView tvGridNum = findViewById(R.id.tv_grid_num);
-        tvGridNum.setText(String.valueOf(gridNum));
+        List<AppInfo> dataList = new ArrayList<>();
+        dataList.add(ai);
+
+        mAppAdapter = new AppAdapter(this, mDatabase);
+        mAppAdapter.setDataList(dataList);
+
+        mAppGrid = findViewById(R.id.grid_sample);
+        updateAppGrid();
+
+        changeGridNum(0);
 
         findViewById(R.id.tv_grid_num_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int value = mDatabase.getInt(SettingDB.KEY_GRID_NUM, SettingDB.GRID_NUM_DEF);
-                if (value < SettingDB.GRID_NUM_MAX) {
-                    value++;
-                    mDatabase.set(SettingDB.KEY_GRID_NUM, value);
-                    tvGridNum.setText(String.valueOf(value));
-                }
+                changeGridNum(1);
             }
         });
 
         findViewById(R.id.tv_grid_num_sub).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int value = mDatabase.getInt(SettingDB.KEY_GRID_NUM, SettingDB.GRID_NUM_DEF);
-                if (value > SettingDB.GRID_NUM_MIN) {
-                    value--;
-                    mDatabase.set(SettingDB.KEY_GRID_NUM, value);
-                    tvGridNum.setText(String.valueOf(value));
-                }
+                changeGridNum(-1);
             }
         });
 
-        int gridHeight = mDatabase.getInt(SettingDB.KEY_GRID_HEIGHT, 0);
-        TextView tvGridHeight = findViewById(R.id.tv_grid_height);
-        tvGridHeight.setText(String.valueOf(gridHeight));
+        changeGridHeight(0);
 
         TextView tvGridHeightAdd = findViewById(R.id.tv_grid_height_add);
         tvGridHeightAdd.setOnClickListener(new View.OnClickListener() {
@@ -126,9 +133,7 @@ public class SettingActivity extends BaseActivity {
             }
         });
 
-        int iconSize = mDatabase.getInt(SettingDB.KEY_ICON_SIZE, 0);
-        TextView tvIconSize = findViewById(R.id.tv_icon_size);
-        tvIconSize.setText(String.valueOf(iconSize));
+        changeIconSize(0);
 
         TextView tvIconSizeAdd = findViewById(R.id.tv_icon_size_add);
         tvIconSizeAdd.setOnClickListener(new View.OnClickListener() {
@@ -183,10 +188,189 @@ public class SettingActivity extends BaseActivity {
                 return false;
             }
         });
+
+        changeLabelColor(0, 0);
+
+        TextView tvLabelRedAdd = findViewById(R.id.tv_label_red_add);
+        tvLabelRedAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelColor(16, 1);
+            }
+        });
+        tvLabelRedAdd.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelColor(16, 1);
+                mHandler.postDelayed(mLabelRedAddRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelRedAdd.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelRedAddRun);
+                }
+
+                return false;
+            }
+        });
+
+        TextView tvLabelRedRub = findViewById(R.id.tv_label_red_sub);
+        tvLabelRedRub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelColor(16, -1);
+            }
+        });
+        tvLabelRedRub.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelColor(16, -1);
+                mHandler.postDelayed(mLabelRedSubRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelRedRub.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelRedSubRun);
+                }
+
+                return false;
+            }
+        });
+
+        TextView tvLabelGreenAdd = findViewById(R.id.tv_label_green_add);
+        tvLabelGreenAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelColor(8, 1);
+            }
+        });
+        tvLabelGreenAdd.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelColor(8, 1);
+                mHandler.postDelayed(mLabelGreenAddRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelGreenAdd.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelGreenAddRun);
+                }
+
+                return false;
+            }
+        });
+
+        TextView tvLabelGreenSub = findViewById(R.id.tv_label_green_sub);
+        tvLabelGreenSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelColor(8, -1);
+            }
+        });
+        tvLabelGreenSub.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelColor(8, -1);
+                mHandler.postDelayed(mLabelGreenSubRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelGreenSub.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelGreenSubRun);
+                }
+
+                return false;
+            }
+        });
+
+        TextView tvLabelBlueAdd = findViewById(R.id.tv_label_blue_add);
+        tvLabelBlueAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelColor(0, 1);
+            }
+        });
+        tvLabelBlueAdd.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelColor(0, 1);
+                mHandler.postDelayed(mLabelBlueAddRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelBlueAdd.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelBlueAddRun);
+                }
+
+                return false;
+            }
+        });
+
+        TextView tvLabelBlueSub = findViewById(R.id.tv_label_blue_sub);
+        tvLabelBlueSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelColor(0, -1);
+            }
+        });
+        tvLabelBlueSub.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelColor(0, -1);
+                mHandler.postDelayed(mLabelBlueSubRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelBlueSub.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelBlueSubRun);
+                }
+
+                return false;
+            }
+        });
     }
 
     private void updateAppGrid() {
+        mAppAdapter.getView(0, mAppGrid, null);
 
+        int gridNum = mDatabase.getInt(SettingDB.KEY_GRID_NUM, SettingDB.GRID_NUM_DEF);
+        mAppGrid.getLayoutParams().width = mScreenWidth / gridNum;
+    }
+
+    private void changeGridNum(int change) {
+        int value = mDatabase.getInt(SettingDB.KEY_GRID_NUM, SettingDB.GRID_NUM_DEF) + change;
+        if (value >= SettingDB.GRID_NUM_MIN  && value <= SettingDB.GRID_NUM_MAX) {
+            mDatabase.set(SettingDB.KEY_GRID_NUM, value);
+
+            TextView tvGridNum = findViewById(R.id.tv_grid_num);
+            tvGridNum.setText(String.valueOf(value));
+
+            updateAppGrid();
+        }
     }
 
     private void changeGridHeight(int change) {
@@ -197,6 +381,8 @@ public class SettingActivity extends BaseActivity {
 
             TextView view = findViewById(R.id.tv_grid_height);
             view.setText(String.valueOf(value));
+
+            updateAppGrid();
         }
     }
     private Runnable mGridHeightAddRun = new Runnable() {
@@ -223,6 +409,8 @@ public class SettingActivity extends BaseActivity {
 
             TextView view = findViewById(R.id.tv_icon_size);
             view.setText(String.valueOf(value));
+
+            updateAppGrid();
         }
     }
     private Runnable mIconSizeAddRun = new Runnable() {
@@ -237,6 +425,77 @@ public class SettingActivity extends BaseActivity {
         @Override
         public void run() {
             changeIconSize(-1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private void changeLabelColor(int shift, int change) {
+        int value = mDatabase.getInt(SettingDB.KEY_LABEL_COLOR, SettingDB.LABEL_COLOR_DEF);
+        int color = value >> shift & 0xff;
+        color += change;
+
+        if (color >= 0 && color <= 255) {
+            value = value & ~(0xff << shift) | color << shift;
+
+            mDatabase.set(SettingDB.KEY_LABEL_COLOR, value);
+
+            TextView view = findViewById(R.id.tv_label_red);
+            view.setText(String.valueOf(value >> 16 & 0xff));
+
+            view = findViewById(R.id.tv_label_green);
+            view.setText(String.valueOf(value >> 8 & 0xff));
+
+            view = findViewById(R.id.tv_label_blue);
+            view.setText(String.valueOf(value & 0xff));
+
+            updateAppGrid();
+        }
+    }
+
+    private Runnable mLabelRedAddRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelColor(16, 1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private Runnable mLabelRedSubRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelColor(16, -1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private Runnable mLabelGreenAddRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelColor(8, 1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private Runnable mLabelGreenSubRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelColor(8, -1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private Runnable mLabelBlueAddRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelColor(0, 1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private Runnable mLabelBlueSubRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelColor(0, -1);
             mHandler.postDelayed(this, mRepeatDelay);
         }
     };

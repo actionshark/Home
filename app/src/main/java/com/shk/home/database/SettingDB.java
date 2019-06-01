@@ -21,7 +21,7 @@ public class SettingDB extends KeyValueDB {
     public static final String KEY_LABEL_SIZE = "label_size";
 
     public static final String KEY_LABEL_COLOR = "label_color";
-    public static final int LABEL_COLOR_DEF = 0x000000;
+    public static final int LABEL_COLOR_DEF = 0xff000000;
 
     public SettingDB(Context context) {
         super(context, TABLE_NAME);
