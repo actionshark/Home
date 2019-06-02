@@ -12,6 +12,20 @@ public abstract class Database extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onCreate(SQLiteDatabase db) {
+    }
+
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        try {
+            open(db);
+        } catch (Exception e) {
+        }
+    }
+
+    public abstract void open(SQLiteDatabase db) throws Exception;
 }

@@ -8,4 +8,7 @@ public class AppInfo {
     public String label;
     public Drawable icon;
     public Intent intent;
+
+    public int clickTimes = 0;
+    public long lastClick = 0;
 }

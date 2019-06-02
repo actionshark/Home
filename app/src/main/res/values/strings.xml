@@ -1,13 +1,23 @@
 <resources>
     <string name="app_name">Home</string>
 
-    <string name="setting_key_grid_num">Grid Num</string>
-    <string name="setting_key_grid_height">Grid Height</string>
-    <string name="setting_key_icon_size">Icon Size</string>
-    <string name="setting_key_label_size">Label Size</string>
-    <string name="setting_key_label_red">Label Color Red</string>
-    <string name="setting_key_label_green">Label Color Green</string>
-    <string name="setting_key_label_blue">Label Color Blue</string>
+    <string name="setting_grid_num">Grid Num</string>
+    <string name="setting_grid_height">Grid Height</string>
+    <string name="setting_icon_size">Icon Size</string>
+
+    <string name="setting_label_size">Label Size</string>
+    <string name="setting_label_red">Label Color Red</string>
+    <string name="setting_label_green">Label Color Green</string>
+    <string name="setting_label_blue">Label Color Blue</string>
+
+    <string name="setting_sort_key">Sort Key</string>
+    <string name="sort_key_app_label">App Label</string>
+    <string name="sort_key_click_times">Click Times</string>
+    <string name="sort_key_last_click">Last Click</string>
+
+    <string name="setting_sort_order">Sort Order</string>
+    <string name="sort_order_asc">Asc</string>
+    <string name="sort_order_desc">Desc</string>
     
     <string name="add_char">+</string>
     <string name="sub_char">-</string>

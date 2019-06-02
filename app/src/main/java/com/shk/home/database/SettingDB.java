@@ -25,6 +25,21 @@ public class SettingDB extends KeyValueDB {
     public static final String KEY_LABEL_COLOR = "label_color";
     public static final int LABEL_COLOR_DEF = 0xff000000;
 
+    public static final String KEY_SORT_KEY = "sort_key";
+    public static final String SORT_KEY_APP_LABEL = "sort_key_app_label";
+    public static final String SORT_KEY_CLICK_TIMES = "sort_key_click_times";
+    public static final String SORT_KEY_LAST_CLICK = "sort_key_last_click";
+    public static final String[] SORT_KEY_VALUES = new String[] {
+            SORT_KEY_APP_LABEL, SORT_KEY_CLICK_TIMES, SORT_KEY_LAST_CLICK
+    };
+
+    public static final String KEY_SORT_ORDER = "sort_order";
+    public static final String SORT_ORDER_ASC = "sort_order_asc";
+    public static final String SORT_ORDER_DESC = "sort_order_desc";
+    public static final String[] SORT_ORDER_VALUES = new String[] {
+            SORT_ORDER_ASC, SORT_ORDER_DESC
+    };
+
     public SettingDB(Context context) {
         super(context, TABLE_NAME);
     }

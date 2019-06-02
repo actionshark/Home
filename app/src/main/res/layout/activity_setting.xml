@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_grid_num"
+                    android:text="@string/setting_grid_num"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -85,7 +85,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_grid_height"
+                    android:text="@string/setting_grid_height"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -136,7 +136,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_icon_size"
+                    android:text="@string/setting_icon_size"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -187,7 +187,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_label_size"
+                    android:text="@string/setting_label_size"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -238,7 +238,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_label_red"
+                    android:text="@string/setting_label_red"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -289,7 +289,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_label_green"
+                    android:text="@string/setting_label_green"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -340,7 +340,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_label_blue"
+                    android:text="@string/setting_label_blue"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -377,12 +377,75 @@
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_grid_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_sort_key"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_sort_key"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_group_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_sort_order"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_sort_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/setting_group_margin"
         android:layout_marginBottom="@dimen/setting_group_margin"
         android:background="#ffffff">
 

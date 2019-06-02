@@ -408,6 +408,22 @@ public class SettingActivity extends BaseActivity {
                 return false;
             }
         });
+
+        changeSortKey(0);
+        findViewById(R.id.tv_sort_key).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeSortKey(1);
+            }
+        });
+
+        changeSortOrder(0);
+        findViewById(R.id.tv_sort_order).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeSortOrder(1);
+            }
+        });
     }
 
     private void updateAppGrid() {
@@ -583,4 +599,46 @@ public class SettingActivity extends BaseActivity {
             mHandler.postDelayed(this, mRepeatDelay);
         }
     };
+
+    private void changeSortKey(int change) {
+        String value = mDatabase.getString(SettingDB.KEY_SORT_KEY, SettingDB.SORT_KEY_APP_LABEL);
+
+        int length = SettingDB.SORT_KEY_VALUES.length;
+        int index = -1;
+        for (int i = 0; i < length; i++) {
+            if (SettingDB.SORT_KEY_VALUES[i].equals(value)) {
+                index = i;
+                break;
+            }
+        }
+        index = (index + change + length) % length;
+
+        value = SettingDB.SORT_KEY_VALUES[index];
+        mDatabase.set(SettingDB.KEY_SORT_KEY, value);
+
+        int resId = getResources().getIdentifier(value, "string", getPackageName());
+        TextView view = findViewById(R.id.tv_sort_key);
+        view.setText(resId);
+    }
+
+    private void changeSortOrder(int change) {
+        String value = mDatabase.getString(SettingDB.KEY_SORT_ORDER, SettingDB.SORT_ORDER_ASC);
+
+        int length = SettingDB.SORT_ORDER_VALUES.length;
+        int index = -1;
+        for (int i = 0; i < length; i++) {
+            if (SettingDB.SORT_ORDER_VALUES[i].equals(value)) {
+                index = i;
+                break;
+            }
+        }
+        index = (index + change + length) % length;
+
+        value = SettingDB.SORT_ORDER_VALUES[index];
+        mDatabase.set(SettingDB.KEY_SORT_ORDER, value);
+
+        int resId = getResources().getIdentifier(value, "string", getPackageName());
+        TextView view = findViewById(R.id.tv_sort_order);
+        view.setText(resId);
+    }
 }

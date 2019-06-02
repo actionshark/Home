@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.shk.home.util.AppLog;
 
-public class KeyValueDB extends Database {
+public abstract class KeyValueDB extends Database {
     protected static final String COL_KEY = "key_";
     protected static final String COL_VALUE = "value_";
 
@@ -20,7 +20,7 @@ public class KeyValueDB extends Database {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void open(SQLiteDatabase db) {
         String sql = String.format("create table %s(%s varchar unique, %s varchar)",
                 mTableName, COL_KEY, COL_VALUE);
         db.execSQL(sql);
