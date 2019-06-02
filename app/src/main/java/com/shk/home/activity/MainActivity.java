@@ -2,6 +2,7 @@ package com.shk.home.activity;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -147,5 +148,14 @@ public class MainActivity extends BaseActivity {
 
         mAdapterApp.setDataList(appInfos);
         mAdapterApp.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+
+        return super.onKeyUp(keyCode, event);
     }
 }
