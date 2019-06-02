@@ -435,7 +435,7 @@ public class SettingActivity extends BaseActivity {
 
     private void changeGridNum(int change) {
         int value = mDatabase.getInt(SettingDB.KEY_GRID_NUM, SettingDB.GRID_NUM_DEF) + change;
-        if (value >= SettingDB.GRID_NUM_MIN  && value <= SettingDB.GRID_NUM_MAX) {
+        if (value >= SettingDB.GRID_NUM_MIN && value <= SettingDB.GRID_NUM_MAX) {
             mDatabase.set(SettingDB.KEY_GRID_NUM, value);
 
             TextView tvGridNum = findViewById(R.id.tv_grid_num);
@@ -457,6 +457,7 @@ public class SettingActivity extends BaseActivity {
             updateAppGrid();
         }
     }
+
     private Runnable mGridHeightAddRun = new Runnable() {
         @Override
         public void run() {
@@ -485,6 +486,7 @@ public class SettingActivity extends BaseActivity {
             updateAppGrid();
         }
     }
+
     private Runnable mIconSizeAddRun = new Runnable() {
         @Override
         public void run() {
@@ -513,6 +515,7 @@ public class SettingActivity extends BaseActivity {
             updateAppGrid();
         }
     }
+
     private Runnable mLabelSizeAddRun = new Runnable() {
         @Override
         public void run() {

@@ -33,26 +33,26 @@ public class StatDB extends Database {
     }
 
     public StatInfo queryInfo(String pkgName) {
-         Cursor cursor = getReadableDatabase().query(TABLE_NAME, new String[] {COL_CLICK_TIMES, COL_LAST_CLICK},
-                COL_PKG_NAME + " = ?", new String[] {pkgName},
+        Cursor cursor = getReadableDatabase().query(TABLE_NAME, new String[]{COL_CLICK_TIMES, COL_LAST_CLICK},
+                COL_PKG_NAME + " = ?", new String[]{pkgName},
                 null, null, null);
 
-         StatInfo si = null;
+        StatInfo si = null;
 
-         if (cursor.moveToNext()) {
-             si = new StatInfo();
-             si.pkgName = pkgName;
-             si.clickTimes = cursor.getInt(cursor.getColumnIndex(COL_CLICK_TIMES));
-             si.lastClick = cursor.getLong(cursor.getColumnIndex(COL_LAST_CLICK));
-         }
+        if (cursor.moveToNext()) {
+            si = new StatInfo();
+            si.pkgName = pkgName;
+            si.clickTimes = cursor.getInt(cursor.getColumnIndex(COL_CLICK_TIMES));
+            si.lastClick = cursor.getLong(cursor.getColumnIndex(COL_LAST_CLICK));
+        }
 
-         cursor.close();
+        cursor.close();
 
-         return si;
+        return si;
     }
 
     public Map<String, StatInfo> queryMap() {
-        Cursor cursor = getReadableDatabase().query(TABLE_NAME, new String[] {COL_PKG_NAME, COL_CLICK_TIMES, COL_LAST_CLICK},
+        Cursor cursor = getReadableDatabase().query(TABLE_NAME, new String[]{COL_PKG_NAME, COL_CLICK_TIMES, COL_LAST_CLICK},
                 null, null, null, null, null);
 
         Map<String, StatInfo> map = new HashMap<>();
@@ -88,7 +88,7 @@ public class StatDB extends Database {
             cv.put(COL_CLICK_TIMES, si.clickTimes + 1);
 
             int count = getWritableDatabase().update(TABLE_NAME, cv,
-                    COL_PKG_NAME + " = ?", new String[] {pkgName});
+                    COL_PKG_NAME + " = ?", new String[]{pkgName});
             return count == 1;
         }
     }

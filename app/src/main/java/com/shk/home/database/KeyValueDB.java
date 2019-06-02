@@ -45,7 +45,7 @@ public abstract class KeyValueDB extends Database {
         cv.put(COL_VALUE, string);
 
         int count = getWritableDatabase().update(mTableName, cv,
-                COL_KEY +  " = ?", new String[] {key});
+                COL_KEY + " = ?", new String[]{key});
 
         if (count == 0) {
             cv.put(COL_KEY, key);
