@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.shk.home.R;
 import com.shk.home.data.AppInfo;
 import com.shk.home.database.SettingDB;
-import com.shk.home.view.AppAdapter;
+import com.shk.home.data.AppAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -183,6 +183,62 @@ public class SettingActivity extends BaseActivity {
                 int action = event.getAction();
                 if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
                     mHandler.removeCallbacks(mIconSizeSubRun);
+                }
+
+                return false;
+            }
+        });
+
+        changeLabelSize(0);
+
+        TextView tvLabelSizeAdd = findViewById(R.id.tv_label_size_add);
+        tvLabelSizeAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelSize(1);
+            }
+        });
+        tvLabelSizeAdd.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelSize(1);
+                mHandler.postDelayed(mLabelSizeAddRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelSizeAdd.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelSizeAddRun);
+                }
+
+                return false;
+            }
+        });
+
+        TextView tvLabelSizeSub = findViewById(R.id.tv_label_size_sub);
+        tvLabelSizeSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeLabelSize(-1);
+            }
+        });
+        tvLabelSizeSub.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                changeLabelSize(-1);
+                mHandler.postDelayed(mLabelSizeSubRun, mRepeatDelay);
+                return true;
+            }
+        });
+        tvLabelSizeSub.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                    mHandler.removeCallbacks(mLabelSizeSubRun);
                 }
 
                 return false;
@@ -425,6 +481,34 @@ public class SettingActivity extends BaseActivity {
         @Override
         public void run() {
             changeIconSize(-1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private void changeLabelSize(int change) {
+        int value = mDatabase.getInt(SettingDB.KEY_LABEL_SIZE, 0) + change;
+
+        if (value >= SettingDB.LABEL_SIZE_MIN && value <= SettingDB.LABEL_SIZE_MAX) {
+            mDatabase.set(SettingDB.KEY_LABEL_SIZE, value);
+
+            TextView view = findViewById(R.id.tv_label_size);
+            view.setText(String.valueOf(value));
+
+            updateAppGrid();
+        }
+    }
+    private Runnable mLabelSizeAddRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelSize(1);
+            mHandler.postDelayed(this, mRepeatDelay);
+        }
+    };
+
+    private Runnable mLabelSizeSubRun = new Runnable() {
+        @Override
+        public void run() {
+            changeLabelSize(-1);
             mHandler.postDelayed(this, mRepeatDelay);
         }
     };

@@ -177,7 +177,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/setting_grid_height"
-                android:layout_marginBottom="@dimen/setting_group_margin"
+                android:layout_marginBottom="@dimen/setting_grid_margin"
                 android:background="@color/setting_grid_backgroud"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -187,7 +187,58 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_key_label_color"
+                    android:text="@string/setting_key_label_size"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_label_size_sub"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/sub_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_label_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_label_size_add"
+                    android:layout_width="@dimen/setting_grid_height"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/btn_bg"
+                    android:gravity="center"
+                    android:text="@string/add_char"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_grid_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_key_label_red"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
 
@@ -198,7 +249,7 @@
 
                 <TextView
                     android:id="@+id/tv_label_red_sub"
-                    android:layout_width="20sp"
+                    android:layout_width="@dimen/setting_grid_height"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_bg"
                     android:gravity="center"
@@ -216,17 +267,40 @@
 
                 <TextView
                     android:id="@+id/tv_label_red_add"
-                    android:layout_width="20sp"
+                    android:layout_width="@dimen/setting_grid_height"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_bg"
                     android:gravity="center"
                     android:text="@string/add_char"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_grid_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_key_label_green"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tv_label_green_sub"
-                    android:layout_width="20sp"
+                    android:layout_width="@dimen/setting_grid_height"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_bg"
                     android:gravity="center"
@@ -244,17 +318,40 @@
 
                 <TextView
                     android:id="@+id/tv_label_green_add"
-                    android:layout_width="20sp"
+                    android:layout_width="@dimen/setting_grid_height"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_bg"
                     android:gravity="center"
                     android:text="@string/add_char"
                     android:textColor="@color/setting_text"
                     android:textSize="@dimen/setting_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_grid_height"
+                android:layout_marginBottom="@dimen/setting_group_margin"
+                android:background="@color/setting_grid_backgroud"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/setting_grid_padding"
+                android:paddingEnd="@dimen/setting_grid_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_key_label_blue"
+                    android:textColor="@color/setting_text"
+                    android:textSize="@dimen/setting_text_size" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/tv_label_blue_sub"
-                    android:layout_width="20sp"
+                    android:layout_width="@dimen/setting_grid_height"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_bg"
                     android:gravity="center"
@@ -272,7 +369,7 @@
 
                 <TextView
                     android:id="@+id/tv_label_blue_add"
-                    android:layout_width="20sp"
+                    android:layout_width="@dimen/setting_grid_height"
                     android:layout_height="match_parent"
                     android:background="@drawable/btn_bg"
                     android:gravity="center"

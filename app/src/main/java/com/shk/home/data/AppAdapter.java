@@ -1,4 +1,4 @@
-package com.shk.home.view;
+package com.shk.home.data;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shk.home.R;
-import com.shk.home.data.AppInfo;
 import com.shk.home.database.SettingDB;
+import com.shk.home.util.AppLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,11 +81,12 @@ public class AppAdapter extends BaseAdapter {
 
         AppInfo data = mDataList.get(position);
 
+        holder.icon.setImageDrawable(data.icon);
         lp = holder.icon.getLayoutParams();
         lp.width = lp.height = mSettingDB.getInt(SettingDB.KEY_ICON_SIZE, 0);
-        holder.icon.setImageDrawable(data.icon);
 
         holder.label.setText(data.label);
+        holder.label.setTextSize(mSettingDB.getInt(SettingDB.KEY_LABEL_SIZE, 0));
         holder.label.setTextColor(mSettingDB.getInt(SettingDB.KEY_LABEL_COLOR, SettingDB.LABEL_COLOR_DEF));
 
         return view;

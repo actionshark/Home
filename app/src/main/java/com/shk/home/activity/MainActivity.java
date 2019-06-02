@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.shk.home.R;
-import com.shk.home.view.AppAdapter;
+import com.shk.home.data.AppAdapter;
 import com.shk.home.data.AppInfo;
 import com.shk.home.database.SettingDB;
 import com.shk.home.util.Util;
@@ -67,11 +67,19 @@ public class MainActivity extends BaseActivity {
 
         int iconSize = mSettingDB.getInt(SettingDB.KEY_ICON_SIZE, 0);
         if (iconSize == 0) {
-            iconSize = dm.widthPixels / SettingDB.GRID_NUM_DEF  * 2 / 3;
+            iconSize = gridHeight  * 2 / 3;
             mSettingDB.set(SettingDB.KEY_ICON_SIZE, iconSize);
         }
         SettingDB.ICON_SIZE_MIN = dm.widthPixels / SettingDB.GRID_NUM_MAX  * 2 / 3;
         SettingDB.ICON_SIZE_MAX = dm.widthPixels / SettingDB.GRID_NUM_MIN  * 2 / 3;
+
+        int labelSize = mSettingDB.getInt(SettingDB.KEY_LABEL_SIZE, 0);
+        if (labelSize == 0) {
+            labelSize = gridHeight  * 6 / 100;
+            mSettingDB.set(SettingDB.KEY_LABEL_SIZE, labelSize);
+        }
+        SettingDB.LABEL_SIZE_MIN = 6;
+        SettingDB.LABEL_SIZE_MAX = gridHeight / 4;
 
         List<AppInfo> appInfos = Util.getAppInfos(this);
         mAdapterApp.setDataList(appInfos);

@@ -19,6 +19,8 @@ public class SettingDB extends KeyValueDB {
     public static int ICON_SIZE_MAX = -1;
 
     public static final String KEY_LABEL_SIZE = "label_size";
+    public static int LABEL_SIZE_MIN = -1;
+    public static int LABEL_SIZE_MAX = -1;
 
     public static final String KEY_LABEL_COLOR = "label_color";
     public static final int LABEL_COLOR_DEF = 0xff000000;
